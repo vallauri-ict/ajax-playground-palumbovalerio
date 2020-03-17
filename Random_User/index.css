@@ -1,0 +1,243 @@
+/**************** Attributi generali *********************/
+*{ font-family: sans-serif; }
+
+#wrapper {
+	background-color: #F9F9F9;
+	position: relative;
+	margin: 0;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+a{ color: #08A; }
+
+img{ border: 0; }
+
+.slider{
+	-webkit-appearance:none;
+	width:60%;
+	height: 10px;
+	margin:30px auto auto auto;
+	border: 1px solid black;
+	border-radius: 50px;
+	background-color: black;
+}
+
+.slider:disabled{
+	border: 1px solid rgba(100,100,100,0.5);;
+	background-color: rgba(100,100,100,0.5);;
+}
+
+.slider::-webkit-slider-thumb{
+	-webkit-appearance: media-slider;
+	width:20px;
+	height:20px;
+	background-color: green;
+	border: 2px solid lightgreen;
+	border-radius: 50%;
+	box-shadow:0 0 20px 0 rgba(0,255,0,1);
+}
+
+.slider:disabled::-webkit-slider-thumb{
+	background-color: grey;
+	border: 2px solid gray;
+	box-shadow: none;
+}
+/*********************************************************/
+
+/******************* Header ***********************/
+.horizontal_center {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+header {
+	width: 100%;
+	height: 450px;
+	background: #2C2E31;
+	text-align: center;
+	overflow: hidden;
+	color: white;
+}
+
+header h1 {
+	margin: 0;
+	padding-top: 100px;
+	font-size: 48px;
+	font-weight: 100;
+}
+/************************************************/
+
+/**************** Pulsanti di navigazione ****************/
+#destra{
+	width: 60px;
+	height: 60px;
+	display: inline-block;
+	position: absolute;
+	top:25%;
+	right: 5%;
+	background-image: url("img/frecciaDestra.png");
+	background-position: center;
+	background-size: contain;
+	opacity: 0.5;
+	transition: all .25s ease-in-out;
+	visibility: hidden;
+}
+
+#sinistra{
+	width:60px;
+	height: 60px;
+	display: inline-block;
+	position: absolute;
+	top:25%;
+	left: 5%;
+	background-image: url("img/frecciaSinistra.png");
+	background-position: center;
+	background-size: contain;
+	opacity: 0.5;
+	transition: all .5s;
+	visibility: hidden;
+}
+
+#sinistra:hover, #destra:hover{
+	opacity: 1;
+	transform: rotate(360deg);
+}
+/**************************************************/
+
+/********************* Body ***********************/
+#sezione { margin-top: -200px }
+
+.scheda {
+	position: relative;
+	padding: 20px 0;
+	width: 80%;
+	left: 10%;
+	height: auto;
+	background: #FFF;
+	border-radius: 3px;
+	box-shadow: 0 0 1px rgba(0, 0, 0, .5);
+	overflow: hidden;
+	text-align: center;
+	z-index: 5;
+}
+
+.scheda:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 130px;
+	top: 0;
+	background: #F9F9F9;
+	border-bottom: 1px solid rgba(0, 0, 0, .15);
+	z-index: -1;
+}
+
+.schedaChar {
+	background: #F9F9F9;
+	border: 1px solid rgba(0, 0, 0, .15);
+	padding: 20px 0;
+	border-radius: 3px;
+}
+
+.scheda .utente {
+	position: relative;
+	background: white;
+	padding: 5px;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	margin-bottom: 30px;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.scheda .utente img {
+	width: 150px;
+	border-radius: 50%
+}
+
+.scheda #titolo {
+	color: #999;
+	font-size: 18px;
+	margin: 0
+}
+
+.scheda #valore {
+	color: #2C2E31;
+	font-size: 38px;
+	margin: 5px;
+	overflow: auto;
+	text-transform: capitalize
+}
+/****************************************************/
+
+/******************* Card list **********************/
+.opzioni {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	float: left;
+	height: 20%;
+}
+
+.opzioni li {
+	cursor: pointer;
+	display: block;
+	width: 40px;
+	height: 48px;
+	float: left;
+	margin: 20px;
+	background-image: url("img/card_icons.png");
+	background-size: 378px;
+	background-position-y: -48px;
+	transition: all .25s ease-out;
+}
+
+#dettagli{ height: auto; } /**/
+
+.opzioni li:before {
+	content: attr(data-label);
+	opacity: 0;
+}
+
+.opzioni li[data-label=name] { background-position: 0 -48px }
+.opzioni li[data-label=email] { background-position: -68px -48px }
+.opzioni li[data-label=birthday] { background-position: -135px -48px }
+.opzioni li[data-label=location] { background-position: -203px -48px }
+.opzioni li[data-label=phone] { background-position: -270px -48px }
+.opzioni li[data-label=pass] { background-position: -338px -48px }
+
+.opzioni li.active[data-label=name] { background-position: 0 -96px }
+.opzioni li.active[data-label=email] { background-position: -68px -96px }
+.opzioni li.active[data-label=birthday] { background-position: -135px -96px }
+.opzioni li.active[data-label=location] { background-position: -203px -96px }
+.opzioni li.active[data-label=phone] { background-position: -270px -96px }
+.opzioni li.active[data-label=pass] { background-position: -338px -96px }
+/*****************************************************************************/
+
+
+/********************** Media query (Per il responsive) **********************/
+@media screen and (max-width:400px) {
+	.scheda{ height: 10%; }
+	#sezione { margin-top: -80px }
+	.scheda #valore { font-size: 28px }
+	li[data-label=email] { display: none }
+	.scheda .opzioni { margin-top: 25px }
+	.scheda .opzioni li { margin: 0 5px }
+}
+
+@media screen and (max-width:300px) {
+	header h1 { font-size: 32px }
+	.scheda{ height: 20%; }
+}
+
+@media screen and (max-width:1145px) {
+	#wrapper.active { left: -260px }
+	#wrapper.active #navbar { right: 300px }
+}
+/***************************************************************************/

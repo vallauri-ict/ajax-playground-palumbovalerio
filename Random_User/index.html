@@ -1,0 +1,94 @@
+<!DOCTYPE html> <!-- documento html5 -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="img/icon.png" type="image/icon type">
+    <link id="stylesheet" rel="stylesheet" href="south-street/jquery-ui.css">
+    <script src="jQuery.js" type="text/javascript"></script>
+    <script src="index.js" type="text/javascript"></script>
+    <script src="south-street/jquery-ui.js"></script>
+    <title>Random User Generator</title>
+</head>
+<body id="wrapper">
+<header>
+    <h1>RANDOM USER GENERATOR</h1>
+    <p>A free, <a target="_blank" id="openSource" href="https://github.com/RandomAPI/Randomuser.me-Node">open-source</a>
+        API for generating random user data. Like Lorem Ipsum, but for people. </p>
+</header>
+<section id="sezione">
+    <div class="scheda">
+        <div id="dettagli">
+            <div id="destra"></div>
+            <div id="sinistra"></div>
+            <div class="utente horizontal_center" id="utente">
+                <img alt="" id="picture" src="img/UserZero.png">
+            </div>
+            <p id="titolo">Fill the fields below and click on the generate button!</p>
+            <p id="valore"></p>
+        </div>
+        <ul class="opzioni horizontal_center" id="opzioni">
+            <li data-title="Hi, My name is" data-value="" data-label="name"></li>
+            <li data-title="My email address is" data-value="" data-label="email" data-caps="false"></li>
+            <li data-title="My birthday is" data-value="" data-label="birthday"></li>
+            <li data-title="My address is" data-value="" data-label="location"></li>
+            <li data-title="My phone number is" data-value="" data-label="phone"></li>
+            <li data-title="My password is" data-value="" data-label="pass"></li>
+        </ul>
+    </div>
+</section>
+
+<footer class="scheda">
+    <label for="slider">NUMBER OF RESULTS:</label><br>
+    <input type="range" min="1" max="20" value="1" id="slider" class="slider"><br>
+    <span id="valore_slider">1</span>
+    <br><br><br><br>
+
+    <label>Gender:</label><br>
+    <input type="radio" name="gender" value="&gender=male" > Male
+    <input type="radio" name="gender" value="&gender=female" > Female
+    <input type="radio" name="gender" value="" checked> All
+    <br><br>
+
+    <label>Nationality:</label><br>
+    <div id="Nat">
+        US<input type="checkbox" value="US">
+        GB<input type="checkbox" value="GB">
+        DE<input type="checkbox" value="DE">
+        IR<input type="checkbox" value="IR">
+        BR<input type="checkbox" value="BR">
+        AU<input type="checkbox" value="AU">
+        CA<input type="checkbox" value="CA">
+        CH<input type="checkbox" value="CH">
+        DK<input type="checkbox" value="DK">
+        ES<input type="checkbox" value="ES">
+        FI<input type="checkbox" value="FI">
+        FR<input type="checkbox" value="FR">
+        IE<input type="checkbox" value="IE">
+        NO<input type="checkbox" value="NO">
+        NL<input type="checkbox" value="NL">
+        NZ<input type="checkbox" value="NZ">
+        TR<input type="checkbox" value="TR">
+    </div>
+    <br>
+
+    <label>Password:</label><br>
+    <div id="Pass">
+        Uppercase<input type="checkbox" value="upper">
+        Lowercase<input type="checkbox" value="lower">
+        <br><br>
+        Number<input type="checkbox" value="number">
+        Special chars<input type="checkbox" value="special">
+        <br><br>
+        <div class="schedaChar">
+            <label for="slider">NUMBER OF CHARS:</label><br>
+            <input type="range" min="8" max="30" value="8" id="sliderChar" class="slider" disabled><br>
+            <span id="valore_sliderChar">8</span><br><br>
+            Interval<input type="checkbox" value="yes" id="interval" disabled>
+        </div>
+    </div>
+    <br><br>
+    <input type="button" id="btnGenerate" value="Generate">
+</footer>
+</body>
+</html>

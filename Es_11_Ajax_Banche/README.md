@@ -13,7 +13,7 @@ Manegement of a simulation of the Italian banking system
 --------------------------------
 
 ```javascript
-function inviaRichiesta(method, url, parameters="") //Send a request for ajax
+function inviaRichiesta(method, url, parameters="")
 function error(jqXHR, text_status, string_error)    //In case of error it returns the type
 ```
 

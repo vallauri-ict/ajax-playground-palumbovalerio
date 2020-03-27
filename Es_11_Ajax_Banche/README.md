@@ -12,14 +12,21 @@ Manegement of a simulation of the Italian banking system
 
 --------------------------------
 
+# libreria.js
 ```javascript
-function inviaRichiesta(method, url, parameters="") //Send a request for ajax
-```
-```javascript
-function error(jqXHR, text_status, string_error)    //In case of error it returns the type
+function inviaRichiesta(method, url, parameters=""){} //Send a request for ajax
+function error(jqXHR, text_status, string_error){}    //In case of error it returns the type
 ```
 
 At the error function the parameters are automatically injected
+
+# library.php
+```php
+function connection($dbName){}  //Create the connection with the database
+function runQuery($con, $sql){} //Run a specific query
+function parameterControl($parameter, $responseCode, $secondaryCondition=true){} //Control of a specific parameter
+function isNumericControl($parameterName, $con){} //Control if a parameter is numeric. If this is true, it return the parameter
+```
 
 --------------------------------
 

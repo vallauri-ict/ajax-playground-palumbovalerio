@@ -1,4 +1,4 @@
-### Es_11_Ajax_Banche 
+# Es_11_Ajax_Banche 
 
 Manegement of a simulation of the Italian banking system
 
@@ -12,7 +12,7 @@ Manegement of a simulation of the Italian banking system
 
 --------------------------------
 
-# libreria.js
+### libreria.js
 ```javascript
 function inviaRichiesta(method, url, parameters=""){} //Send a request for ajax
 function error(jqXHR, text_status, string_error){}    //In case of error it returns the type
@@ -20,7 +20,7 @@ function error(jqXHR, text_status, string_error){}    //In case of error it retu
 
 At the error function the parameters are automatically injected
 
-# library.php
+### library.php
 ```php
 function connection($dbName){}  //Create the connection with the database
 function runQuery($con, $sql){} //Run a specific query

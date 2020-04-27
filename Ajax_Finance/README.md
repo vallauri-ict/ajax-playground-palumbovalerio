@@ -1,4 +1,4 @@
-# 02_Ajax_Finance
+# Ajax_Finance
 
 API Request to fill a table with datas of a company selected by a combo box
 or searched by an apposite text box

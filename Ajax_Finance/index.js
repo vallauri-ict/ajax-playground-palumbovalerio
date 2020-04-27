@@ -3,6 +3,21 @@
 $(document).ready(function () {
     let slctSymbol=$("#slctSymbol");
     slctSymbol.prop("selectedIndex","-1");
+	
+	$.getJSON("http://localhost:3000/sector", function(data)
+    {
+        for(let key in data)
+        {
+            if(key != "Meta Data")
+            {
+                $("<option>", {
+                    text: key,
+                    value: key,
+                }).appendTo($("#slctSector"));
+            }
+        }
+        $("#slctSector").prop("selectedIndex",-1);
+    });
 
     slctSymbol.on("change",function() {
         DeleteRows();
@@ -18,6 +33,38 @@ $(document).ready(function () {
             getSymbolSearch(str);
         }
         //console.log(str.length);
+    });
+	
+	//Creazione chart
+    let ctx = document.getElementById('myChart').getContext('2d');
+    $.getJSON("http://localhost:3000/chart", function(data){
+		
+        let myChart = new Chart(ctx,data);
+    });
+	
+	$("#slctSector").on("change", function(){
+        let sector=this.value;
+        //Creazione chart
+        let ctx = document.getElementById('myChart').getContext('2d');
+        $.getJSON("http://localhost:3000/chart", function(data){
+			let labels=[];
+			let values=[];
+			let i=0;
+			$.getJSON("http://localhost:3000/sector",function(metaData){
+			for(let key in metaData[sector])
+			{
+				labels[i]=key;
+				values[i++]=metaData[sector][key];
+			}
+			
+			/*i=0;
+			for(let val of metaData[sector])
+			*/	
+			});
+			data["data"]["labels"]=labels;
+			data["data"]["datasets"][0]["data"][0]=values;
+            let myChart = new Chart(ctx,data);
+        });
     });
 });
 

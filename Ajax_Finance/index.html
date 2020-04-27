@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<script src="index.js"></script>
 	</head>
 	<body>
@@ -46,6 +47,14 @@
 								<th>Volume</th>
 							</tr>
 						</table>
+					</div>
+					<div>
+						<p>Scegli il settore da visualizzare nel grafico.</p>
+						<select class="form-control" id="slctSector"></select>
+					</div>
+					<canvas id="myChart" width="400" height="400"></canvas>
+					<div>
+						Since the key on which this page runs is free, we are not allowed to make more than 5 calls per minute or 500 calls per day.
 					</div>
 				</div>
 				<div class="col-sm-3"></div>

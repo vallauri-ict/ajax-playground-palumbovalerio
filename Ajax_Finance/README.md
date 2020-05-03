@@ -1,20 +1,22 @@
 # Ajax_Finance
 
-API Request to fill a table with datas of a company selected by a combo box
-or searched by an apposite text box
+API Request to obtain datas of different company
 
 --------------------------------
-*Project version: __1.0.0__*
+*Project version: __2.0.0__*
 
 *Project specifics:*
 1. Allows you to choose a company from the the combo box;
-2. Allows you to search a company id
-3. Show a table with datas of the chosen company;
+2. Allows you to search a company id;
+3. Show a table with datas of the chosen company
+4. Allows you to choose a sector of companies performances
+5. Show a chart with performances datas;
 
 --------------------------------
 
 ### index.js
 ```javascript
+//Most Important Function
 function getGlobalQuotes(symbol, n) {
     let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=-Insert here your key-";
     $.getJSON(url, function (data) {
@@ -44,22 +46,11 @@ function getSymbolSearch(keywords) {
     });
 }
 
-function CreateRows(n) {
-    let tr=$("<tr>").addClass("deletableRows");
-
-    $("<td>").prop("id", "symbol"+n).appendTo(tr);
-    $("<td>").prop("id", "lastTrade"+n).appendTo(tr);
-    $("<td>").prop("id", "lastTradeTime"+n).appendTo(tr);
-    $("<td>").prop("id", "change"+n).appendTo(tr);
-    $("<td>").prop("id", "open"+n).appendTo(tr);
-    $("<td>").prop("id", "previousClose"+n).appendTo(tr);
-    $("<td>").prop("id", "daysLow"+n).appendTo(tr);
-    $("<td>").prop("id", "daysHigh"+n).appendTo(tr);
-    $("<td>").prop("id", "volume"+n).appendTo(tr);
-    tr.appendTo($("#table"));
-}
-
-function DeleteRows() { $(".deletableRows").remove(); }
+//Other Function
+function CreateRows(n) {}
+function DeleteRows() {}
+function Random(min, max) {}
+function RandomColorGenerator(isTransparent, transFirstValue=Random(0,1), transMin=1, transMax=9){}
 ```
 
 *data* parameter is automatically injected

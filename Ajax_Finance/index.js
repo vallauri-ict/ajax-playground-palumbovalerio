@@ -3,21 +3,8 @@
 $(document).ready(function () {
     let slctSymbol=$("#slctSymbol");
     slctSymbol.prop("selectedIndex","-1");
-	
-	$.getJSON("http://localhost:3000/sector", function(data)
-    {
-        for(let key in data)
-        {
-            if(key != "Meta Data")
-            {
-                $("<option>", {
-                    text: key,
-                    value: key,
-                }).appendTo($("#slctSector"));
-            }
-        }
-        $("#slctSector").prop("selectedIndex",-1);
-    });
+	let chart=$("#myChart").hide();
+	let myChart= new Chart(chart,{});
 
     slctSymbol.on("change",function() {
         DeleteRows();
@@ -32,41 +19,55 @@ $(document).ready(function () {
             DeleteRows();
             getSymbolSearch(str);
         }
-        //console.log(str.length);
     });
 	
-	//Creazione chart
-    let ctx = document.getElementById('myChart').getContext('2d');
-    $.getJSON("http://localhost:3000/chart", function(data){
-		
-        let myChart = new Chart(ctx,data);
+	$.getJSON("http://localhost:3000/sector", function(data)
+    {
+        for(let key in data)
+        {
+            if(key != "Meta Data")
+            {
+                $("<option>", {
+                    text: key,
+                    value: key,
+                }).appendTo($("#slctSector"));
+            }
+        }
+		$("#slctSector").prop("selectedIndex",-1);
     });
+	
 	
 	$("#slctSector").on("change", function(){
         let sector=this.value;
         //Creazione chart
-        let ctx = document.getElementById('myChart').getContext('2d');
         $.getJSON("http://localhost:3000/chart", function(data){
-			let labels=[];
-			let values=[];
-			let i=0;
+			myChart.destroy();
+			myChart = new Chart(chart,data);
+			let labels=data["data"]["labels"]=[];
+			let values=data["data"]["datasets"][0]["data"]=[];
+			let backgroundColor=data["data"]["datasets"][0]["data"]["backgroundColor"]=[];
+			let borderColor=data["data"]["datasets"][0]["data"]["borderColor"]=[];
+			
 			$.getJSON("http://localhost:3000/sector",function(metaData){
 			for(let key in metaData[sector])
 			{
-				labels[i]=key;
-				values[i++]=metaData[sector][key];
+				let color=RandomColorGenerator(true, 1);
+				labels.push(key);
+				values.push(metaData[sector][key].replace("%", ""));
+				borderColor.push(color);
+				color=color.replace("1)", "0.2)");
+				backgroundColor.push(color);
 			}
-			
-			/*i=0;
-			for(let val of metaData[sector])
-			*/	
+				
+			myChart.update();
+			chart.show();
 			});
-			data["data"]["labels"]=labels;
-			data["data"]["datasets"][0]["data"][0]=values;
-            let myChart = new Chart(ctx,data);
         });
     });
 });
+
+
+/*Functions*/
 
 function getGlobalQuotes(symbol, n) {
     let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=9W3WBFZDS1SDT2TV";
@@ -113,3 +114,26 @@ function CreateRows(n) {
 }
 
 function DeleteRows() { $(".deletableRows").remove(); }
+
+function Sectors(){
+	
+}
+
+function Random(min, max) { return Math.floor((max - min + 1) * Math.random()) + min; }
+
+function RandomColorGenerator(isTransparent, transFirstValue=Random(0,1), transMin=1, transMax=9){
+	if(isTransparent)
+	{
+		let transparentValue;
+		if(transFirstValue==1)
+			transparentValue=transFirstValue;
+		else
+		{
+			let str=transFirstValue + "."+ Random(transMin, transMax);
+			transparentValue=parseFloat(str);
+		}
+		return "rgba(" + Random(0, 255) + ", " + Random(0, 255) + ", " + Random(0, 255) + ", " + transparentValue +")";
+	}
+	else
+		return "rgb(" + Random(0, 255) + ", " + Random(0, 255) + ", " + Random(0, 255) + ")";
+}

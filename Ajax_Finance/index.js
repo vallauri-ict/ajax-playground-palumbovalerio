@@ -66,7 +66,6 @@ $(document).ready(function () {
     });
 });
 
-
 /*Functions*/
 
 function getGlobalQuotes(symbol, n) {

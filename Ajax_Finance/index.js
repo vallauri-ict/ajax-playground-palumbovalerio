@@ -121,13 +121,13 @@ function RandomColorGenerator(isTransparent, transFirstValue=Random(0,1), transM
 	if(isTransparent)
 	{
 		let transparentValue;
-		if(transFirstValue==1)
-			transparentValue=transFirstValue;
-		else
+		if(transFirstValue==0)
 		{
 			let str=transFirstValue + "."+ Random(transMin, transMax);
 			transparentValue=parseFloat(str);
 		}
+		else
+			transparentValue=transFirstValue;
 		return "rgba(" + Random(0, 255) + ", " + Random(0, 255) + ", " + Random(0, 255) + ", " + transparentValue +")";
 	}
 	else

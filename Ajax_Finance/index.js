@@ -115,10 +115,6 @@ function CreateRows(n) {
 
 function DeleteRows() { $(".deletableRows").remove(); }
 
-function Sectors(){
-	
-}
-
 function Random(min, max) { return Math.floor((max - min + 1) * Math.random()) + min; }
 
 function RandomColorGenerator(isTransparent, transFirstValue=Random(0,1), transMin=1, transMax=9){

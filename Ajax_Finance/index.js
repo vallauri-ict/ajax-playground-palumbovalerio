@@ -2,15 +2,16 @@
 
 $(document).ready(function () {
     let slctSymbol=$("#slctSymbol");
-    slctSymbol.prop("selectedIndex","-1");
 	let chart=$("#myChart").hide();
 	let myChart= new Chart(chart,{});
+	let _btnDownload=$("#download").hide();
 
     slctSymbol.on("change",function() {
         DeleteRows();
         CreateRows(0);
         getGlobalQuotes(this.value, 0);
     });
+	slctSymbol.prop("selectedIndex","-1");
 
     $("#search").on("keyup",function(){
         let str=$("#search").val();
@@ -45,8 +46,8 @@ $(document).ready(function () {
 			myChart = new Chart(chart,data);
 			let labels=data["data"]["labels"]=[];
 			let values=data["data"]["datasets"][0]["data"]=[];
-			let backgroundColor=data["data"]["datasets"][0]["data"]["backgroundColor"]=[];
-			let borderColor=data["data"]["datasets"][0]["data"]["borderColor"]=[];
+			let backgroundColor=data["data"]["datasets"][0]["backgroundColor"]=[];
+			let borderColor=data["data"]["datasets"][0]["borderColor"]=[];
 			
 			$.getJSON("http://localhost:3000/sector",function(metaData){
 			for(let key in metaData[sector])
@@ -61,9 +62,19 @@ $(document).ready(function () {
 				
 			myChart.update();
 			chart.show();
+			_btnDownload.show();
 			});
         });
     });
+	
+	document.getElementById("download").addEventListener('click', function(){
+	  /*Get image of canvas element*/
+	  let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
+	  /*get download button (tag: <a></a>) */
+	  let a =  document.getElementById("download");
+	  /*insert chart image url to download button (tag: <a></a>) */
+	  a.href = url_base64jp;
+	});
 });
 
 /*Functions*/

@@ -3,7 +3,7 @@
 API Request to obtain datas of different company
 
 --------------------------------
-*Project version: __2.0.0__*
+*Project version: __3.0.0__*
 
 *Project specifics:*
 1. Allows you to choose a company from the the combo box;
@@ -11,6 +11,7 @@ API Request to obtain datas of different company
 3. Show a table with datas of the chosen company
 4. Allows you to choose a sector of companies performances
 5. Show a chart with performances datas;
+6. Allows you to download the chart in jpg format.
 
 --------------------------------
 

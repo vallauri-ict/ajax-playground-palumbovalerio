@@ -5,6 +5,10 @@ $(document).ready(function () {
 	let chart=$("#myChart").hide();
 	let myChart= new Chart(chart,{});
 	let _btnDownload=$("#download").hide();
+	let _btnUpload=$("#upload").hide();
+	
+	// 1. Load the JavaScript client library.
+	gapi.load('client', start);
 
     slctSymbol.on("change",function() {
         DeleteRows();
@@ -63,11 +67,36 @@ $(document).ready(function () {
 			myChart.update();
 			chart.show();
 			_btnDownload.show();
+			_btnUpload.show();
 			});
         });
     });
 	
 	_btnDownload.on('click', function(){_btnDownload.prop("href", document.getElementById("myChart").toDataURL("image/jpg"));});
+	_btnUpload.on('click', function(){
+		var fileContent = 'sample text'; // As a sample, upload a text file.
+		var file = new Blob([fileContent], {type: 'text/plain'});
+		var metadata = {
+			'name': 'sampleName', // Filename at Google Drive
+			'mimeType': 'text/plain', // mimeType at Google Drive
+			'parents': ['### folder ID ###'], // Folder ID at Google Drive
+		};
+
+		var accessToken = gapi.auth.getToken().access_token; // Here gapi is used for retrieving the access token.
+		var form = new FormData();
+		form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+		form.append('file', file);
+
+		fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', {
+			method: 'POST',
+			headers: new Headers({ 'Authorization': 'Bearer ' + accessToken }),
+			body: form,
+		}).then((res) => {
+			return res.json();
+		}).then(function(val) {
+			console.log(val);
+		});
+	});
 });
 
 /*Functions*/
@@ -136,3 +165,22 @@ function RandomColorGenerator(isTransparent, transFirstValue=Random(0,1), transM
 	else
 		return "rgb(" + Random(0, 255) + ", " + Random(0, 255) + ", " + Random(0, 255) + ")";
 }
+
+function start() {
+	 // 2. Initialize the JavaScript client library.
+	 gapi.client.init({
+		'apiKey': 'AIzaSyD2cbBT8V6UF_80e3GrlL7Z-cpmC2MDb9Q',
+		// clientId and scope are optional if auth is not required.
+		'clientId': '441916155699-9mrh5ftu4muhlendrf1nmbu43vbqk1c4.apps.googleusercontent.com',
+		'scope': 'https://www.googleapis.com/auth/drive',
+		}).then(function() {
+		// 3. Initialize and make the API request.
+		return gapi.client.request({
+		  'path': 'https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names',
+		})
+		}).then(function(response) {
+		console.log(response.result);
+		}, function(reason) {
+		console.log('Error: ' + reason.result.error.message);
+	});
+};

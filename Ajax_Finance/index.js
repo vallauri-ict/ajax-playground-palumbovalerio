@@ -67,14 +67,7 @@ $(document).ready(function () {
         });
     });
 	
-	document.getElementById("download").addEventListener('click', function(){
-	  /*Get image of canvas element*/
-	  let url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
-	  /*get download button (tag: <a></a>) */
-	  let a =  document.getElementById("download");
-	  /*insert chart image url to download button (tag: <a></a>) */
-	  a.href = url_base64jp;
-	});
+	_btnDownload.on('click', function(){_btnDownload.prop("href", document.getElementById("myChart").toDataURL("image/jpg"));});
 });
 
 /*Functions*/

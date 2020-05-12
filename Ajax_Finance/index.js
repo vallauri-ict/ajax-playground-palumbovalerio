@@ -56,12 +56,11 @@ $(document).ready(function () {
 			$.getJSON("http://localhost:3000/sector",function(metaData){
 			for(let key in metaData[sector])
 			{
-				let color=RandomColorGenerator(true, 1);
+				let color=RandomColorGenerator(false);
 				labels.push(key);
 				values.push(metaData[sector][key].replace("%", ""));
-				borderColor.push(color);
-				color=color.replace("1)", "0.2)");
 				backgroundColor.push(color);
+				borderColor.push(color);
 			}
 				
 			myChart.update();

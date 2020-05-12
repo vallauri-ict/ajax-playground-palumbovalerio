@@ -1,4 +1,4 @@
-### RandomUser
+# RandomUser
 
 RandomUser is a project created to generate random informations about a
 inexistent people to use, for example, in a database
@@ -10,6 +10,13 @@ inexistent people to use, for example, in a database
 1. Create a list of people with generic features;
 2. The users can personalize the generation with a series of fields
    like the type of chars in passwords;
+   
+### index.js
+```javascript
+function inviaRichiesta(parametri, callback){} //Send a request for ajax
+function aggiornaPagina(data){} //Update the page
+function initializeUser(index){} //Initialize the user
+```
 
 my Social Media | Links
 ------------- | ------------------------------------------------------------------

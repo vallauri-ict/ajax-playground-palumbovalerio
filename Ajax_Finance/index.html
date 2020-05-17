@@ -4,9 +4,10 @@
 		<title>Ajax Finance</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="google-signin-client_id" content="25340076437-h3c3ujfof3rm70gstpph9r6ur2be6d69.apps.googleusercontent.com">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-		<link rel="icon" href="Icon.png">
+		<link rel="icon" href="img/Icon.png">
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -17,21 +18,31 @@
 		::-webkit-scrollbar {
 			display: none;
 		}	
+		.fa-google{
+			color:red;
+		}
+		.fa-sign-in-alt{
+			color:blue;
+		}
+		body{
+			background-image: url("img/Background.jpg");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+			padding: 30px;
+		}
 	</style>
 	<body>
 		<div class="container-fluid" style="padding:0px;">
 			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-				<select class="form-control" id="slctSymbol" style="width: 210px;">
-					<option value="MSFT">Microsoft</option>
-					<option value="SNE">Sony</option>
-					<option value="BABA">Alibaba</option>
-					<option value="IBM">IBM</option>
-					<option value="XIACF">Xiaomi</option>
-				</select>
-				<div style="width: 150px; color:white; margin-left: 35%"> Ajax Finance </div>
+				<select class="form-control" id="slctSymbol" style="width: 150px;"> </select>
+				<div style="width: 200px; color:white; margin-left: 30%"> Ajax Finance </div>
 				<form class="form-inline" style="margin-left: 33%;">
 				  <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search">
 				</form>
+				<a id="signIn" class="btn btn-default float-right bg-flat-color-1">
+					<i id="signInIco"></i>
+				</a>
 			</nav>
 			<div class="row">
 				<div class="col-sm-3"></div>
@@ -61,7 +72,7 @@
 						<select class="form-control" id="slctSector"></select>
 					</div>
 					<canvas id="myChart" width="600" height="400" style="margin-top: 20px"></canvas>
-					<a id="download" download="ChartImage.jpg" href="" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px" title="Download chart">
+					<a id="download" download="ChartImage.jpg" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px" title="Download chart">
 						<i class="fa fa-download"></i>
 					</a>
 					<a id="upload" class="btn btn-primary float-left bg-flat-color-1" title="Upload chart">

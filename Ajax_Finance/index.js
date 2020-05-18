@@ -13,20 +13,22 @@ $(document).ready(function () {
 	// Take element
     let slctSymbol=$("#slctSymbol");
 	let slctSector=$("#slctSector");
+	let search=$("#search");
 	let chart=$("#myChart").hide();
 	let myChart= new Chart(chart,{});
 	let _btnDownload=$("#download").hide();
 	let _btnUpload=$("#upload").hide();
 	let _btnSignIn=$("#signIn");
 	let _signInIco=$("#signInIco");
+	let nCall=0;
 	
-	if(localStorage.getItem("accessToken")==null) 
-	{
+	setInterval(function(){nCall=0}, 60000);
+	
+	if(localStorage.getItem("accessToken")==null) {
 		_signInIco.addClass("fas fa-sign-in-alt");		
 		_btnSignIn.prop("title", "Sign In");
 	}
-	else 
-	{
+	else {
 		_signInIco.addClass("fab fa-google");
 		_btnSignIn.prop("title", "You are already signed in");
 	}
@@ -36,24 +38,22 @@ $(document).ready(function () {
 	$.ajax({
         type: 'POST',
         url: "https://www.googleapis.com/oauth2/v4/token",
-        data: {code:code
-            ,redirect_uri:redirect_uri,
-            client_secret:client_secret,
-        client_id:client_id,
-        scope:scope,
-        grant_type:"authorization_code"},
-        dataType: "json",
-        success: function(resultData) 
-        {
-           localStorage.setItem("accessToken",resultData.access_token);
-           localStorage.setItem("refreshToken",resultData.refreshToken);
-           localStorage.setItem("expires_in",resultData.expires_in);
-		   window.history.pushState({}, document.title, "index.html");
-        }
+        data: {code:code,
+			   redirect_uri:redirect_uri,
+               client_secret:client_secret,
+               client_id:client_id,
+               scope:scope,
+               grant_type:"authorization_code"},
+               dataType: "json",
+			   success: function(resultData) {
+				   localStorage.setItem("accessToken",resultData.access_token);
+				   localStorage.setItem("refreshToken",resultData.refreshToken);
+				   localStorage.setItem("expires_in",resultData.expires_in);
+				   window.history.pushState({}, document.title, "index.html");
+				}
 	});
 	
-	$.getJSON("http://localhost:3000/companies", function(data)
-    {
+	$.getJSON("http://localhost:3000/companies", function(data){
 		for(let i=0;i<data.length;i++){
 			$("<option>", {
 				text: data[i]["desc"],
@@ -64,18 +64,32 @@ $(document).ready(function () {
     });
 
     slctSymbol.on("change",function() {
-        DeleteRows();
-        CreateRows(0);
-        getGlobalQuotes(this.value, 0);
+		if(nCall<5){
+			DeleteRows();
+			CreateRows(0);
+			getGlobalQuotes(this.value, 0);
+			nCall++;
+		}
+		else{
+			alert("You can't do more than 5 call per minute!");
+			slctSymbol.prop("selectedIndex",-1);
+		}
     });
 
-    $("#search").on("keyup",function(){
-        let str=$("#search").val();
-        if(str.length>=2)
-        {
-            DeleteRows();
-            getSymbolSearch(str);
-        }
+    search.on("keyup",function(){
+		if(nCall<5){
+			let str=search.val();
+			if(str.length>=2)
+			{
+				DeleteRows();
+				slctSymbol.prop("selectedIndex",-1);
+				getSymbolSearch(str);
+			}
+		}
+		else{
+			alert("You can't do more than 5 call per minute!");
+			search.val("");
+		}
     });
 	
 	$.getJSON("http://localhost:3000/sector", function(data)
@@ -125,26 +139,19 @@ $(document).ready(function () {
 	_btnDownload.on('click', function(){ _btnDownload.prop("href", document.getElementById("myChart").toDataURL("image/jpg")); });
 	
 	_btnUpload.on('click', function(){
-		if(localStorage.getItem("accessToken")!=null)
-		{					
-			let file = dataURItoBlob(document.getElementById("myChart").toDataURL("image/jpg"));
-			console.log(file);
-			
-			let upload = new Upload(file);
+		if(localStorage.getItem("accessToken")==null) signIn(client_id,redirect_uri,scope);		
+		let file = dataURItoBlob(document.getElementById("myChart").toDataURL("image/jpg"));
+		console.log(file);
 		
-			// maby check size or type here with upload.getSize() and upload.getType()
-			
-			// execute upload
-			upload.doUpload();
-		}
-		else
-			alert("You must sign in first!");
+		let upload = new Upload(file);
+	
+		// maby check size or type here with upload.getSize() and upload.getType()
+		
+		// execute upload
+		upload.doUpload();
 	});
 	
-	_btnSignIn.on('click', function(){
-		if(localStorage.getItem("accessToken")==null)
-			signIn(client_id,redirect_uri,scope);
-	});
+	_btnSignIn.on('click', function(){ if(localStorage.getItem("accessToken")==null) signIn(client_id,redirect_uri,scope); });
 	
 	
 	/*Functions*/
@@ -170,15 +177,18 @@ $(document).ready(function () {
 		let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=9W3WBFZDS1SDT2TV";
 		$.getJSON(url, function (data) {
 			let dataMatches=data["bestMatches"];
+			let length=5-nCall;
+			if(dataMatches.length<=5-nCall) length=dataMatches.length;
 			try{
-				for(let i=0;dataMatches.length; i++)
+				for(let i=0;i<length; i++)
 				{					
 					CreateRows(i);
 					getGlobalQuotes(dataMatches[i]["1. symbol"], i);
+					nCall++;
 				}
 			}
 			catch(ex){
-					setTimeout(function() {alert("You can't do more than five call per minute")}, 500);
+					nCall=5;
 				}
 		});
 	}
@@ -219,10 +229,8 @@ $(document).ready(function () {
 			return "rgb(" + Random(0, 255) + ", " + Random(0, 255) + ", " + Random(0, 255) + ")";
 	}
 
-	function signIn(client_id,redirect_uri,scope){
-		 
+	function signIn(client_id,redirect_uri,scope){		 
 	   // the actual url to which the user is redirected to 
-
 	   let url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri="+redirect_uri
 	   +"&prompt=consent&response_type=code&client_id="+client_id+"&scope="+scope
 	   +"&access_type=offline";
@@ -231,27 +239,21 @@ $(document).ready(function () {
 	   window.location = url;
 	} 
 
-	let Upload = function (file) 
-	{
-		this.file = file;
-	};
+	let Upload = function (file) { this.file = file; };
 
-	Upload.prototype.getType = function() 
-	{
+	Upload.prototype.getType = function() {
 		localStorage.setItem("type",this.file.type);
 		return this.file.type;
 	};
-	Upload.prototype.getSize = function() 
-	{
+	
+	Upload.prototype.getSize = function() {
 		localStorage.setItem("size",this.file.size);
 		return this.file.size;
 	};
-	Upload.prototype.getName = function() 
-	{
-		return this.file.name;
-	};
-	Upload.prototype.doUpload = function () 
-	{
+	
+	Upload.prototype.getName = function() { return this.file.name; };
+	
+	Upload.prototype.doUpload = function () {
 		let that = this;
 		let formData = new FormData();
 
@@ -261,27 +263,12 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: "POST",
-			beforeSend: function(request) {
-				request.setRequestHeader("Authorization", "Bearer" + " " + localStorage.getItem("accessToken"));
-				
-			},
+			beforeSend: function(request) { request.setRequestHeader("Authorization", "Bearer" + " " + localStorage.getItem("accessToken")); },
 			url: "https://www.googleapis.com/upload/drive/v2/files",
-			data:{
-				uploadType:"media"
-			},
-			xhr: function () {
-				let myXhr = $.ajaxSettings.xhr();
-				/*if (myXhr.upload) {
-					myXhr.upload.addEventListener('progress', that.progressHandling, false);
-				}*/
-				return myXhr;
-			},
-			success: function (data) {
-				console.log(data);
-			},
-			error: function (error) {
-				console.log(error);
-			},
+			data:{ uploadType:"media" },
+			xhr: function () { return $.ajaxSettings.xhr(); },
+			success: function (data) { console.log(data); },
+			error: function (error) { console.log(error); },
 			async: true,
 			data: formData,
 			cache: false,
@@ -290,6 +277,7 @@ $(document).ready(function () {
 			timeout: 60000
 		});
 	};
+	
 	function dataURItoBlob(dataURI) {
 	  // convert base64 to raw binary data held in a string
 	  // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
@@ -305,9 +293,8 @@ $(document).ready(function () {
 	  let ia = new Uint8Array(ab);
 
 	  // set the bytes of the buffer to the correct values
-	  for (let i = 0; i < byteString.length; i++) {
+	  for (let i = 0; i < byteString.length; i++)
 		  ia[i] = byteString.charCodeAt(i);
-	  }
 
 	  // write the ArrayBuffer to a blob, and you're done
 	  let blob = new Blob([ab], {type: mimeString});

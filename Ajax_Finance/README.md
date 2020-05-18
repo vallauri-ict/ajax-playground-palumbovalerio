@@ -37,16 +37,21 @@ function getGlobalQuotes(symbol, n) {
 }
 
 function getSymbolSearch(keywords) {
-    let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=-Insert here your key-";
-    $.getJSON(url, function (data) {
-        let dataMatches=data["bestMatches"];
-        for(let i=0;dataMatches.length; i++)
-        {
-            CreateRows(i);
-            getGlobalQuotes(dataMatches[i]["1. symbol"], i);
-        }
-    });
-}
+		let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=9W3WBFZDS1SDT2TV";
+		$.getJSON(url, function (data) {
+			let dataMatches=data["bestMatches"];
+			try{
+				for(let i=0;dataMatches.length; i++)
+				{					
+					CreateRows(i);
+					getGlobalQuotes(dataMatches[i]["1. symbol"], i);
+				}
+			}
+			catch(ex){
+					setTimeout(function() {alert("You can't do more than five call per minute")}, 500);
+				}
+		});
+	}
 
 //Other Function
 function CreateRows(n){}

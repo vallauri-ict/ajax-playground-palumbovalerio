@@ -170,11 +170,16 @@ $(document).ready(function () {
 		let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=9W3WBFZDS1SDT2TV";
 		$.getJSON(url, function (data) {
 			let dataMatches=data["bestMatches"];
-			for(let i=0;dataMatches.length; i++)
-			{
-				CreateRows(i);
-				getGlobalQuotes(dataMatches[i]["1. symbol"], i);
+			try{
+				for(let i=0;dataMatches.length; i++)
+				{					
+					CreateRows(i);
+					getGlobalQuotes(dataMatches[i]["1. symbol"], i);
+				}
 			}
+			catch(ex){
+					setTimeout(function() {alert("You can't do more than five call per minute")}, 500);
+				}
 		});
 	}
 
@@ -224,12 +229,7 @@ $(document).ready(function () {
 
 	   // this line makes the user redirected to the url
 	   window.location = url;
-	}
-
-	function stripQueryStringAndHashFromPath(url) 
-	{
-		return url.split("?")[0].split("#")[0];
-	}   
+	} 
 
 	let Upload = function (file) 
 	{

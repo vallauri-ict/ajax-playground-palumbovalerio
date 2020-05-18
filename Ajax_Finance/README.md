@@ -3,7 +3,7 @@
 API Request to obtain datas of different company
 
 --------------------------------
-*Project version: __3.0.2__*
+*Project version: __4.0.0__*
 
 *Project specifics:*
 1. Allows you to choose a company from the the combo box;
@@ -12,7 +12,7 @@ API Request to obtain datas of different company
 4. Allows you to choose a sector of companies performances
 5. Show a chart with performances datas;
 6. Allows you to download the chart in jpg format;
-7. Allows you to upload the chart on Google Drive (NOT WORKING).
+7. Allows you to upload the chart on Google Drive.
 
 --------------------------------
 
@@ -49,10 +49,18 @@ function getSymbolSearch(keywords) {
 }
 
 //Other Function
-function CreateRows(n) {}
-function DeleteRows() {}
-function Random(min, max) {}
+function CreateRows(n){}
+function DeleteRows(){}
+function Random(min, max){}
 function RandomColorGenerator(isTransparent, transFirstValue=Random(0,1), transMin=1, transMax=9){}
+function signIn(client_id,redirect_uri,scope){}
+// Functions useful to take data for the upload on google drive
+let Upload = function (file){}
+Upload.prototype.getType = function(){}
+Upload.prototype.getSize = function(){}
+Upload.prototype.getName = function(){}
+Upload.prototype.doUpload = function(){}
+function dataURItoBlob(dataURI){}
 ```
 
 *data* parameter is automatically injected

@@ -140,26 +140,28 @@ $(document).ready(function () {
 	
 	_btnUpload.on('click', function(){
 		if(localStorage.getItem("accessToken")==null) signIn(client_id,redirect_uri,scope);		
-		let file = dataURItoBlob(document.getElementById("myChart").toDataURL("image/jpg"));
-		console.log(file);
+		else{
+			let file = dataURItoBlob(document.getElementById("myChart").toDataURL("image/jpg"));
+			console.log(file);
+			
+			let upload = new Upload(file);
 		
-		let upload = new Upload(file);
-	
-		// maby check size or type here with upload.getSize() and upload.getType()
-		
-		// execute upload
-		upload.doUpload();
-		alert("Upload completed successfully!");
-		_btnUpload.prop({
-			"href":"https://drive.google.com/drive/u/0/my-drive",
-			"target":"_blank"
-		});
-		setTimeout(function(){
+			// maby check size or type here with upload.getSize() and upload.getType()
+			
+			// execute upload
+			upload.doUpload();
+			alert("Upload completed successfully!");
 			_btnUpload.prop({
-			"href":"",
-			"target":""
+				"href":"https://drive.google.com/drive/u/0/my-drive",
+				"target":"_blank"
 			});
-		}, 10);			
+			setTimeout(function(){
+				_btnUpload.prop({
+				"href":"",
+				"target":""
+				});
+			}, 10);			
+		}
 	});
 	
 	_btnSignIn.on('click', function(){ if(localStorage.getItem("accessToken")==null) signIn(client_id,redirect_uri,scope); });

@@ -189,6 +189,7 @@ $(document).ready(function () {
 	}
 
 	function getSymbolSearch(keywords) {
+		nCall++;
 		let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=9W3WBFZDS1SDT2TV";
 		try{
 			$.getJSON(url, function (data) {

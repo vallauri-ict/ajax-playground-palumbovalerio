@@ -149,6 +149,17 @@ $(document).ready(function () {
 		
 		// execute upload
 		upload.doUpload();
+		alert("Upload completed successfully!");
+		_btnUpload.prop({
+			"href":"https://drive.google.com/drive/u/0/my-drive",
+			"target":"_blank"
+		});
+		setTimeout(function(){
+			_btnUpload.prop({
+			"href":"",
+			"target":""
+			});
+		}, 10);			
 	});
 	
 	_btnSignIn.on('click', function(){ if(localStorage.getItem("accessToken")==null) signIn(client_id,redirect_uri,scope); });
@@ -158,7 +169,8 @@ $(document).ready(function () {
 
 	function getGlobalQuotes(symbol, n) {
 		let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=9W3WBFZDS1SDT2TV";
-		$.getJSON(url, function (data) {
+		try{
+			$.getJSON(url, function (data) {
 				let globalQuoteData = data["Global Quote"];
 				$("#symbol"+n).text(globalQuoteData["01. symbol"]);
 				$("#previousClose"+n).text(globalQuoteData["08. previous close"]);
@@ -169,28 +181,32 @@ $(document).ready(function () {
 				$("#daysLow"+n).text(globalQuoteData["04. low"]);
 				$("#daysHigh"+n).text(globalQuoteData["03. high"]);
 				$("#volume"+n).text(globalQuoteData["06. volume"]);
-			}
-		);
+			});
+		}
+		catch(ex){
+			nCall=5;
+		}		
 	}
 
 	function getSymbolSearch(keywords) {
 		let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=9W3WBFZDS1SDT2TV";
-		$.getJSON(url, function (data) {
-			let dataMatches=data["bestMatches"];
-			let length=5-nCall;
-			if(dataMatches.length<=5-nCall) length=dataMatches.length;
-			try{
+		try{
+			$.getJSON(url, function (data) {
+				let dataMatches=data["bestMatches"];
+				let length=5-nCall;
+				if(dataMatches.length<=5-nCall) length=dataMatches.length;
 				for(let i=0;i<length; i++)
 				{					
 					CreateRows(i);
 					getGlobalQuotes(dataMatches[i]["1. symbol"], i);
 					nCall++;
 				}
-			}
-			catch(ex){
-					nCall=5;
-				}
-		});
+				
+			});
+		}
+		catch(ex){
+			nCall=5;
+		}
 	}
 
 	function CreateRows(n) {

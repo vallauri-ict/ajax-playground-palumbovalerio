@@ -53,6 +53,7 @@ $(document).ready(function () {
 				}
 	});
 	
+	// db.json calls
 	$.getJSON("http://localhost:3000/companies", function(data){
 		for(let i=0;i<data.length;i++){
 			$("<option>", {
@@ -62,7 +63,23 @@ $(document).ready(function () {
 		}
 		slctSymbol.prop("selectedIndex",-1);
     });
-
+	
+	$.getJSON("http://localhost:3000/sector", function(data)
+    {
+        for(let key in data)
+        {
+            if(key != "Meta Data")
+            {
+                $("<option>", {
+                    text: key,
+                    value: key,
+                }).appendTo(slctSector);
+            }
+        }
+		slctSector.prop("selectedIndex",-1);
+    });
+	
+	// Call Events
     slctSymbol.on("change",function() {
 		if(nCall<5){
 			DeleteRows();
@@ -90,21 +107,6 @@ $(document).ready(function () {
 			alert("You can't do more than 5 call per minute!");
 			search.val("");
 		}
-    });
-	
-	$.getJSON("http://localhost:3000/sector", function(data)
-    {
-        for(let key in data)
-        {
-            if(key != "Meta Data")
-            {
-                $("<option>", {
-                    text: key,
-                    value: key,
-                }).appendTo(slctSector);
-            }
-        }
-		slctSector.prop("selectedIndex",-1);
     });
 	
 	
@@ -136,6 +138,7 @@ $(document).ready(function () {
         });
     });
 	
+	// Button Events
 	_btnDownload.on('click', function(){ _btnDownload.prop("href", document.getElementById("myChart").toDataURL("image/jpg")); });
 	
 	_btnUpload.on('click', function(){
@@ -167,7 +170,7 @@ $(document).ready(function () {
 	_btnSignIn.on('click', function(){ if(localStorage.getItem("accessToken")==null) signIn(client_id,redirect_uri,scope); });
 	
 	
-	/*Functions*/
+	// Methods
 
 	function getGlobalQuotes(symbol, n) {
 		let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=9W3WBFZDS1SDT2TV";

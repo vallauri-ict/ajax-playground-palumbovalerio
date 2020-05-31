@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 $(document).ready(function() {	
 	let _wrapper = $("#wrapper");
@@ -7,28 +7,20 @@ $(document).ready(function() {
 	let _divAlunni = $("#divMovimenti");
 	let slctMaterie=$("#slctMateria");
 	let slctClassi=$("#slctClasse");
-	let _btnLogout=$("#btnLogout");
-	let _btnChangePwd=$("#btnChangePwd");
-	let username;
 	let strMaterie;
 
 	_wrapper.hide();
 	let rqMaterie=inviaRichiesta("GET", "server/start.php");
 	rqMaterie.fail(function (jqXHR, test_status, str_error) {
-		if(jqXHR.status==403) window.location="login.html";
+		if(jqXHR.status==403) location.href="pages/login/login.html";
 		else error(jqXHR, test_status, str_error);
 	});
 	rqMaterie.done(function (data) {
 		console.log(data);
 		_wrapper.show();
 		_divAlunni.hide();
-		username=data.name;
 
-		// nome correntista
-		$("<p>", {
-			"css":{"text-align":"right"},
-			"html":"Benvenuto <b>" + username +" </b>"
-		}).appendTo(_divTitolo);
+		$("#username").html("Gestisci utente: <strong>"+data.name+"</strong>");
 
 		strMaterie=data.subjects.split("-");
 		for(let i=0;i<strMaterie.length;i++){
@@ -68,12 +60,5 @@ $(document).ready(function() {
 				});
 			}
 		}).appendTo(_divFiliali);*/
-	});
-
-	_btnChangePwd.on("click", function () {
-		let _richiestaId= inviaRichiesta("POST", "server/changePwData.php", { "username":username } );
-
-		_richiestaId.fail(function(jqXHR, test_status, str_error) { error(jqXHR, test_status, str_error); });
-		_richiestaId.done(function(data) { location.href = "changePwData.html"; });
 	});
 });

@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Cache-control" content="NO-CACHE">
+		<meta http-equiv="PRAGMA" content="NO-CACHE">
+
+		<title>Richiedi nuova password</title>
+
+		<link rel="icon" href="../../img/icoVallauri.png" type="image/png" />
+		<link rel="stylesheet" href="../../libraries/library.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+		<script src="../../libraries/library.js"></script>
+		<script src="pwRequest.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<form class="form-group" style="padding-top:10%" id="frm">
+				<div class="row">
+				  <div class="col-sm-4"></div>
+				  <div class="col-sm-4"> <div class="jumbotron"><h2 class="text-center">Richiedi nuova password</h2></div></div>
+				  <div class="col-sm-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+						<div class="input-group" style="margin-bottom: 10px">
+							<span class="input-group-text"><i class="fa fa-user-circle-o fa-fw"></i></span>
+							<input class="form-control" type="text" id="txtUsername" placeholder="Username">
+						</div>
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+					<div id="domanda"></div>
+					<div class="input-group" id="divDomanda" style="margin-bottom: 10px">
+						<span class="input-group-text"><i class="fa fa-reply"></i></span>
+						<input class="form-control" type="text" id="txtRisposta" placeholder="Inserisci la risposta">
+					</div>
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+						<div class="alert alert-danger alert-dismissible" id="lblError">
+							<button type="button" class="close" >&times;</button>
+							<div id="ErrorText">  </div>
+						</div>
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4"><button id="btnInvia" class="btn btn-lg btn-primary btn-block" type="button">Invia</button></div>
+					<div class="col-sm-4"></div>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

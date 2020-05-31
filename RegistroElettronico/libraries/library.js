@@ -19,3 +19,21 @@ function error(jqXHR, text_status, string_error) {
     else
         alert("Server Error: " + jqXHR.status + " - " + jqXHR.responseText);
 }
+
+// md5 restituisce una word esadecimale, quindi è obbligatorio .toString()
+function pwEncrypton(password) { return CryptoJS.MD5(password).toString(); }
+
+function showLblError(lblError, textPointer, text) {
+    lblError.show(); // unauthorized
+    textPointer.html(text);
+}
+
+function setError(control) {
+    control.addClass("is-invalid"); // bordo rosso textbox
+    control.prev().addClass("icona-rossa"); // colore icona
+}
+
+function removeError(control) {
+    control.removeClass("is-invalid");  // bordo rosso textbox
+    control.prev().removeClass("icona-rossa");  // colore icona
+}

@@ -5,15 +5,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login</title>	
 	
-	<link rel="icon"       href="img/icoVallauri.png" type="image/png"/>
+	<link rel="icon"       href="../../img/icoVallauri.png" type="image/png"/>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" >
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="library.css">
+	<link rel="stylesheet" href="../../libraries/library.css">
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-	<script src="library.js"></script>
+	<script src="../../libraries/library.js"></script>
 	<script src="login.js"></script>
 </head>
 
@@ -24,7 +24,7 @@
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4"> 
 			<div class="jumbotron text-center" data-toggle="collapse" data-target="#login">
-				<img src="img/logo.png" width="120" class="rounded-circle"> 
+				<img src="../../img/logo.png" width="120" class="rounded-circle">
 				<h4 style="margin-top:10px">IIS "G. Vallauri" - Fossano</h4>
 			</div>
 		</div>
@@ -75,7 +75,10 @@
 						 dell'altro. Equivalente a btn-block-->
 					<button type="button" class="btn btn-primary form-control" 
 					        id="btnLogin">	LOGIN
-					</button>									
+					</button>
+					<button type="button" class="btn btn-link" id="btnPwRequest" style="height:18px;">
+						hai dimenticato la password?
+					</button>
 				</div>					
 			</form>
 		</div>	

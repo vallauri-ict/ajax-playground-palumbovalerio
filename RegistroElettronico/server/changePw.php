@@ -8,6 +8,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     parameterControl("vecchia", 400);
     parameterControl("nuova", 400);
 
+    checkSession("codProf");
     // 2. Connessione
     $con=connection("4b_scuola");
     $oldPwd=$con->real_escape_string($_POST["vecchia"]);
@@ -15,12 +16,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     $id=$_SESSION["codProf"];
 
     // 3. Query
-    $dbPwd=selectDatas($con, "SELECT pwd FROM professori WHERE codProf='$id'", "pwd");
+    $dbPwd=selectDatas($con, "SELECT pwd FROM professori WHERE codProf=$id", "pwd");
     if($dbPwd!=$oldPwd) error(401, "Password non valida");
     // 4. Restituzione risultato
     else{
-        runQuery($con, "UPDATE professori SET pwd='$newPwd' WHERE codProf='$id'");
-        echo json_encode(array("ris"=>"ok"));
+        runQuery($con, "UPDATE professori SET pwd='$newPwd' WHERE codProf=$id");
+        echo json_encode(array("id"=>$id));
     }
 
     // 5. Close

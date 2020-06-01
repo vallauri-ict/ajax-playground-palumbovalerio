@@ -17,7 +17,16 @@
 	<script src="index.js"></script>			
 </head>
 
-<style> * { margin: 0; padding: 0; } </style>
+<style>
+	* { margin: 0; padding: 0; }
+	body{
+		background-image: url("img/BackgroundIndex.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-position: center;
+	}
+</style>
 
 <body>
 <div class="container-fluid" id="wrapper">
@@ -79,15 +88,15 @@
 		
 		<!-- Elenco Movimenti -->
 		<div class="table-responsive" id="divAlunni">
-			<table class="table table-hover">
-				<thead class="bg-info">
-					<tr>
+			<table class="table table-hover table-borderless table-dark">
+				<thead>
+					<tr align="center" style="font-size: 15pt">
 						<th>Nome</th>
 						<th>Media</th>
 						<th>Modifica</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="tBody">
 				</tbody>
 			</table>
 		</div>

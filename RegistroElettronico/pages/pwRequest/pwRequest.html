@@ -18,12 +18,26 @@
 		<script src="../../libraries/library.js"></script>
 		<script src="pwRequest.js"></script>
 	</head>
+	<style>
+		body{
+			background-image: url("../../img/BackgroundIndex.jpg");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+			background-position: center;
+		}
+	</style>
 	<body>
 		<div class="container">
 			<form class="form-group" style="padding-top:10%" id="frm">
 				<div class="row">
 				  <div class="col-sm-4"></div>
-				  <div class="col-sm-4"> <div class="jumbotron"><h2 class="text-center">Richiedi nuova password</h2></div></div>
+				  <div class="col-sm-4">
+					  <div class="jumbotron bg-transparent text-center">
+						  <img src="../../img/forgotPassword.png" width="120">
+						  <h4 style="color:white">Richiedi password</h4>
+					  </div>
+				  </div>
 				  <div class="col-sm-4"></div>
 				</div>
 				<div class="row">
@@ -39,11 +53,13 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-					<div id="domanda"></div>
-					<div class="input-group" id="divDomanda" style="margin-bottom: 10px">
-						<span class="input-group-text"><i class="fa fa-reply"></i></span>
-						<input class="form-control" type="text" id="txtRisposta" placeholder="Inserisci la risposta">
-					</div>
+						<div style="background-color: rgba(0, 0, 0, 0.5); border-radius: 10px;">
+							<div id="domanda" style="color:white;"></div>
+							<div class="input-group" id="divDomanda" style="margin-bottom: 10px">
+								<span class="input-group-text"><i class="fa fa-reply"></i></span>
+								<input class="form-control" type="text" id="txtRisposta" placeholder="Inserisci la risposta">
+							</div>
+						</div>
 					</div>
 					<div class="col-sm-4"></div>
 				</div>

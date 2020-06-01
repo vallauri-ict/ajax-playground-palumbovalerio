@@ -16,16 +16,24 @@
 	<script src="../../libraries/library.js"></script>
 	<script src="login.js"></script>
 </head>
-
+<style>
+	body{
+		background-image: url("../../img/BackgroundLogin.jpg");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-position: center;
+	}
+</style>
 <body>
 <div class="container-fluid" style="margin-top:50px">		
 	<!-- JUMBOTRON  -->
 	<div class="row">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4"> 
-			<div class="jumbotron text-center" data-toggle="collapse" data-target="#login">
+			<div class="jumbotron text-center bg-transparent" data-toggle="collapse" data-target="#login">
 				<img src="../../img/logo.png" width="120" class="rounded-circle">
-				<h4 style="margin-top:10px">IIS "G. Vallauri" - Fossano</h4>
+				<h4 style="margin-top:10px; color: white">IIS "G. Vallauri" - Fossano</h4>
 			</div>
 		</div>
 		<div class="col-sm-4"></div>
@@ -55,7 +63,7 @@
 						<i class="fas fa-lock"> </i>
 					</span>
 					<input type="password" class="form-control" id="pwd"
-   					       placeholder="Pwd">
+   					       placeholder="Password">
 				</div>
 
 				
@@ -77,7 +85,7 @@
 					        id="btnLogin">	LOGIN
 					</button>
 					<button type="button" class="btn btn-link" id="btnPwRequest" style="height:18px;">
-						hai dimenticato la password?
+						Hai dimenticato la password?
 					</button>
 				</div>					
 			</form>

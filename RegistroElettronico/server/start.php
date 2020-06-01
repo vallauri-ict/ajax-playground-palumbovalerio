@@ -1,7 +1,7 @@
 <?php
 
     header("Content-type:application/json;charset=utf-8");
-    require("library.php");
+    require("../libraries/library.php");
 
     checkSession("codProf");
     // connessione

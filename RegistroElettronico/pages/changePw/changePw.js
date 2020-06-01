@@ -45,7 +45,7 @@ $(document).ready(function() {
 
 			let oldPwdCpt=pwEncrypton(oldPwd.val());
 			let newPwdCpt=pwEncrypton(newPwd.val());
-			let _richiestaCambioPwd= inviaRichiesta("POST", "../../server/changePw.php", { "vecchia":oldPwdCpt, "nuova":newPwdCpt } );
+			let _richiestaCambioPwd= inviaRichiesta("POST", "../../server/changePw.php", { "vecchiaMd5":oldPwdCpt, "vecchia":oldPwd.val(), "nuovaMd5":newPwdCpt, "nuova":newPwd.val() } );
 
 			_richiestaCambioPwd.fail(function(jqXHR, test_status, str_error) {
 				if (jqXHR.status == 401) showLblError(_lblErrore,_errorText, "<strong>Attenzione!</strong> La vecchia password è errata");

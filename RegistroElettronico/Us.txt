@@ -1,9 +1,0 @@
-1° evento
-if (btn.enable==false)
-	var=txt.text;
-
-2° evento
-if(var!=txt.text)
-	btn.enable=true;
-else
-	btn.enable=false;

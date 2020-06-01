@@ -37,3 +37,9 @@ function removeError(control) {
     control.removeClass("is-invalid");  // bordo rosso textbox
     control.prev().removeClass("icona-rossa");  // colore icona
 }
+
+function copyInClipboard(copyText) {
+    let aus = $('<input>').val(copyText).appendTo('body').select();
+    document.execCommand('copy');
+    aus.remove();
+}

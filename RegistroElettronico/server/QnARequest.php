@@ -1,7 +1,7 @@
 <?php
 
 header("Content-type:application/json;charset=utf-8");
-require("library.php");
+require("../libraries/library.php");
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     // 1. Controllo parametri

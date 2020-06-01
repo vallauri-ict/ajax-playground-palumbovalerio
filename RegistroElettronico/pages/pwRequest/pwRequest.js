@@ -53,7 +53,16 @@ $(document).ready(function() {
 			setError(_txtRisposta);
 			showLblError(_lblErrore, _errorText, "<strong>Attenzione!</strong> Risposta errata");
 		}
-		else location.href = "../changePw/changePw.html";
+		else {
+			let _richiestaPw=inviaRichiesta("POST", "../../server/pwRequest.php");
+
+			_richiestaPw.fail(function(jqXHR, test_status, str_error) { error(jqXHR, test_status, str_error); });
+			_richiestaPw.done(function (data) {
+				alert("La tua password è "+ data.ris +". Verrà automaticamente copiata e verrai reindirizzato alla pagina di login");
+				copyInClipboard(data["ris"]);
+				location.href = "../login/login.html";
+			});
+		}
 	}
 	
 	_lblErrore.children("button").on("click", function(){ _lblErrore.hide(); });

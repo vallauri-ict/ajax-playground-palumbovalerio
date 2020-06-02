@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-	
+
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js" charset="utf8"></script>
@@ -43,10 +43,13 @@
 			</ul>
 			<!-- Pulsanti a destra -->
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item" style="padding-right: 30px">
+					<h2 class="text-center" style="color:white"> Registro medie studenti </h2>
+				</li>
 				<li class="nav-item" style="padding-right: 10px">
 					<span class="input-group-text bg-dark">
 						<i class="fas fa-user-edit"> </i>
-						<a class="nav-link" id="username" href="#"></a>
+						<a class="nav-link" id="username" href="pages/userManagement/userManagement.html"></a>
 					</span>
 				</li>
 				<li class="nav-item" style="padding-right: 10px">
@@ -64,20 +67,13 @@
 			</ul>
 		</nav>	
 		<br>
-		
-		<!-- titolo -->
-		<div class="alert alert-primary" id="divTitolo">
-			<h1 class="text-center">
-				Registro medie studenti
-			</h1>
-		</div>
 
 		<!-- Materie -->
 		<div class="form-group alert alert-info">
 			<div class="row">
 				<div class="col-sm-6" align="center">
 					<p><b>Materia:</b></p>
-					<select class="form-control" id="slctMateria" style="width: 150px;"> </select>
+					<select class="form-control" id="slctMateria" style="width: 230px;"> </select>
 				</div>
 				<div class="col-sm-6" align="center">
 					<p><b>Classe:</b></p>
@@ -88,12 +84,13 @@
 		
 		<!-- Elenco Movimenti -->
 		<div class="table-responsive" id="divAlunni">
-			<table class="table table-hover table-borderless table-dark">
+			<table class="table table-hover table-dark">
 				<thead>
 					<tr align="center" style="font-size: 15pt">
-						<th>Nome</th>
-						<th>Media</th>
-						<th>Modifica</th>
+						<th scope="col">#</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Media</th>
+						<th scope="col">Modifica</th>
 					</tr>
 				</thead>
 				<tbody id="tBody">

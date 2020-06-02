@@ -14,7 +14,7 @@
     $materie=selectDatas($con, "SELECT materie FROM professori WHERE codProf=$id", "materie");
     $materia=explode("-", $materie);
 
-    $classi=selectDatas($con, "SELECT classe FROM $materia[0] WHERE codProf=$id", "classe", false);
+    $classi=selectDatas($con, "SELECT classe FROM $materia[0] WHERE codProf=$id", "", false);
 
     $data=array("name" => $nomeUtente, "subjects"=>$materie, "classes"=>$classi);
 

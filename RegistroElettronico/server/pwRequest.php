@@ -5,13 +5,14 @@ require("../libraries/library.php");
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     checkSession("codProf");
+    $tempPw=parameterControl("tempPw", 400);
+
     $con=connection("4b_scuola");
     $id=$_SESSION["codProf"];
 
-    $pwdMd5=selectDatas($con, "SELECT pwd FROM professori WHERE codProf=$id", "pwd");
-    $pwd=selectDatas($con, "SELECT password FROM decriptazione WHERE md5='$pwdMd5'", "password");
+    runQuery($con, "UPDATE professori SET pwd='$tempPw' WHERE codProf=$id");
 
-    echo json_encode(array("ris"=>$pwd));
+    echo json_encode(array("ris"=>$tempPw));
     destroySession();
 
     $con->close();

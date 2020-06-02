@@ -43,3 +43,5 @@ function copyInClipboard(copyText) {
     document.execCommand('copy');
     aus.remove();
 }
+
+function removeDumplicateValue(myArray){ return myArray.filter(function(elem, index, self) { return index === self.indexOf(elem); }); }

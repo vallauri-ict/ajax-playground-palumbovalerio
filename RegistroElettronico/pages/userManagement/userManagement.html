@@ -6,19 +6,20 @@
 		<meta http-equiv="Cache-control" content="NO-CACHE">
 		<meta http-equiv="PRAGMA" content="NO-CACHE">
 
-		<title>Richiedi nuova password</title>
+		<title>Gestisci utente</title>
 
 		<link rel="icon" href="../../img/icoVallauri.png" type="image/png" />
 		<link rel="stylesheet" href="../../libraries/library.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 		<script src="../../libraries/library.js"></script>
-		<script src="pwRequest.js"></script>
+		<script src="userManagement.js"></script>
 	</head>
+
 	<style>
 		body{
 			background-image: url("../../img/BackgroundIndex.jpg");
@@ -30,13 +31,13 @@
 	</style>
 	<body>
 		<div class="container">
-			<form class="form-group" style="padding-top:10%" id="frm">
+			<form style="padding-top:10%">
 				<div class="row">
 				  <div class="col-sm-4"></div>
 				  <div class="col-sm-4">
 					  <div class="jumbotron bg-transparent text-center">
-						  <img src="../../img/forgotPassword.png" width="120">
-						  <h4 style="color:white">Richiedi password</h4>
+						  <img src="../../img/userManagement.png" width="120">
+					  	  <h4 style="color:white">Gestisci utente</h4>
 					  </div>
 				  </div>
 				  <div class="col-sm-4"></div>
@@ -44,21 +45,11 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-						<div class="input-group" style="margin-bottom: 10px">
-							<span class="input-group-text"><i class="fa fa-user-circle-o fa-fw"></i></span>
-							<input class="form-control" type="text" id="txtUsername" placeholder="Username">
-						</div>
-					</div>
-					<div class="col-sm-4"></div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4"></div>
-					<div class="col-sm-4">
 						<div style="background-color: rgba(0, 0, 0, 0.5); border-radius: 10px;">
-							<div id="domanda" style="color:white;"></div>
-							<div class="input-group" id="divDomanda" style="margin-bottom: 10px">
-								<span class="input-group-text"><i class="fa fa-reply"></i></span>
-								<input class="form-control" type="text" id="txtRisposta" placeholder="Inserisci la risposta">
+							<div style="color:white;"> Modifica l'username: </div>
+							<div class="input-group form-group">
+								<span class="input-group-text"><i class="fa fa-user"></i></span>
+								<input class="form-control" type="text" id="txtUser" placeholder="username">
 							</div>
 						</div>
 					</div>
@@ -67,9 +58,25 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-						<div class="alert alert-danger alert-dismissible" id="lblError">
-							<button type="button" class="close" >&times;</button>
-							<div id="ErrorText">  </div>
+						<div style="background-color: rgba(0, 0, 0, 0.5); border-radius: 10px;">
+							<div style="color:white;"> Modifica la domanda di sicurezza: </div>
+							<div class="input-group form-group">
+								<span class="input-group-text"><i class="fa fa-question"></i></span>
+								<input class="form-control" type="text" id="txtQuestion" placeholder="domanda">
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+						<div style="background-color: rgba(0, 0, 0, 0.5); border-radius: 10px;">
+							<div style="color:white;"> Modifica la risposta di sicurezza: </div>
+							<div class="input-group form-group">
+								<span class="input-group-text"><i class="fa fa-reply"></i></span>
+								<input class="form-control" type="text" id="txtAnswer" placeholder="risposta">
+							</div>
 						</div>
 					</div>
 					<div class="col-sm-4"></div>

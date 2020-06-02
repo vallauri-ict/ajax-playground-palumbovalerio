@@ -8,13 +8,13 @@ $(document).ready(function() {
 	let _errorText=$("#ErrorText");
 
 	let rispostaCorretta;
-	
+
 	// all'avvio apriamo subito il jumbotron
 	$(".jumbotron").trigger("click");
     _lblErrore.hide();
     _divDomanda.hide();
-	
-	// il submit deve partire anche senza click 
+
+	// il submit deve partire anche senza click
 	// ma con il solo tasto INVIO
 	username.on("blur", function () {
 		removeError(username);
@@ -41,30 +41,31 @@ $(document).ready(function() {
 			});
 		});
 	});
-	
-	
+
+
 	function changePw(){
 		removeError(_txtRisposta);
 
-		_lblErrore.hide();		
-		
+		_lblErrore.hide();
+
         if (_txtRisposta.val() == "") setError(_txtRisposta);
         else if(_txtRisposta.val()!=rispostaCorretta) {
 			setError(_txtRisposta);
 			showLblError(_lblErrore, _errorText, "<strong>Attenzione!</strong> Risposta errata");
 		}
 		else {
-			let _richiestaPw=inviaRichiesta("POST", "../../server/pwRequest.php");
+			let tempPw=pwEncrypton("prof"+username.val());
+			let _richiestaPw=inviaRichiesta("POST", "../../server/pwRequest.php", {"tempPw":tempPw});
 
 			_richiestaPw.fail(function(jqXHR, test_status, str_error) { error(jqXHR, test_status, str_error); });
 			_richiestaPw.done(function (data) {
-				alert("La tua password è "+ data.ris +". Verrà automaticamente copiata e verrai reindirizzato alla pagina di login");
+				alert("La tua password è prof"+ username.val() +". Verrà automaticamente copiata e verrai reindirizzato alla pagina di login. Reipostala appena possibile!");
 				copyInClipboard(data["ris"]);
 				location.href = "../login/login.html";
 			});
 		}
 	}
-	
+
 	_lblErrore.children("button").on("click", function(){ _lblErrore.hide(); });
-	
+
 });

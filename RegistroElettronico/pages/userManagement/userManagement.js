@@ -44,7 +44,7 @@ $(document).ready(function() {
 			else{
 				let _richiestaCambioDati= inviaRichiesta("POST", "../../server/changeDatas.php", { "username":username.val(), "domanda":domanda, "risposta":answer.val() } );
 
-				_richiestaCambioDati.fail(function(jqXHR, test_status, str_error) { error(jqXHR, test_status, str_error); });
+				_richiestaCambioDati.fail(error);
 				_richiestaCambioDati.done(function(data) {
 					alert("Dati modificati correttamente");
 					location.href = "../../index.html";

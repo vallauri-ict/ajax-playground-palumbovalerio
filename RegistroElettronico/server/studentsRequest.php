@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
     $datas=selectDatas($con, "SELECT * FROM $table WHERE codProf=$id AND classe='$class'", "", false);
 
-    echo json_encode(array($datas));
+    echo json_encode($datas);
 
     $con->close();
 }

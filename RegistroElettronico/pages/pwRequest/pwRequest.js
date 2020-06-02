@@ -57,7 +57,7 @@ $(document).ready(function() {
 			let tempPw=pwEncryption("prof"+username.val());
 			let _richiestaPw=inviaRichiesta("POST", "../../server/pwRequest.php", {"tempPw":tempPw});
 
-			_richiestaPw.fail(function(jqXHR, test_status, str_error) { error(jqXHR, test_status, str_error); });
+			_richiestaPw.fail(error);
 			_richiestaPw.done(function (data) {
 				alert("La tua password è prof"+ username.val() +". Verrà automaticamente copiata e verrai reindirizzato alla pagina di login. Reipostala appena possibile!");
 				copyInClipboard(data["ris"]);

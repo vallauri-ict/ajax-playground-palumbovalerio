@@ -16,6 +16,18 @@
 
 --------------------------------
 
+nomeProfessore | password
+---------------|-----------------------
+Rossi 	|	matematica
+Verdi 	|	italianoStoria
+Abbà	|	geografia
+Cerrato |	inglese1
+Allegri |	informatica
+Berutti	|	sistemiReti
+Isaia	|	tecnologie
+
+Coloro che non sono indicati qui hanno come password: **"password"**
+
 ### libreria.js
 ```javascript
 function inviaRichiesta(method, url, parameters=""){} //Send a request for ajax

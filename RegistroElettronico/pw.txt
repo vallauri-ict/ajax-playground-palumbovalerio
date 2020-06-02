@@ -1,7 +1,0 @@
-Rossi 		matematica
-Verdi 		italianoStoria
-Abbà		geografia
-Cerrato 	inglese1
-Allegri 	informatica
-Berutti		sistemiReti
-Isaia		tecnologie

@@ -10,12 +10,12 @@ $(document).ready(function() {
 	let strMaterie;
 
 	_wrapper.hide();
-	let rqMaterie=inviaRichiesta("POST", "server/index.php");
-	rqMaterie.fail(function (jqXHR, test_status, str_error) {
+	let _richiestaMaterie=inviaRichiesta("POST", "server/index.php", {"index":0});
+	_richiestaMaterie.fail(function (jqXHR, test_status, str_error) {
 		if(jqXHR.status==403) location.href="pages/login/login.html";
 		else error(jqXHR, test_status, str_error);
 	});
-	rqMaterie.done(function (data) {
+	_richiestaMaterie.done(function (data) {
 		console.log(data);
 		_wrapper.show();
 		_divAlunni.hide();
@@ -32,20 +32,22 @@ $(document).ready(function() {
 		}
 		slctMaterie.prop("selectedIndex", "0");
 
-		let aus=[];
-		for(let i=0;i<data.classes.length;i++)
-			aus[i]=data["classes"][i]["classe"];
+		appendClasses(data.classes, slctClassi, "-1");
 
-		let classes = removeDumplicateValue(aus);
-		for(let i=0;i<classes.length;i++) {
-			$("<option>", {
-				text: classes[i],
-				value: classes[i]
-			}).appendTo(slctClassi);
-		}
+		slctMaterie.on("change", function () {
+			let _richiestaClassi=inviaRichiesta("POST", "server/index.php", {"index":parseInt(slctMaterie.prop("selectedIndex"))});
 
-		slctClassi.prop("selectedIndex", "-1");
-
+			_richiestaClassi.fail(function (jqXHR, test_status, str_error) {
+				if(jqXHR.status==403) location.href="pages/login/login.html";
+				else error(jqXHR, test_status, str_error);
+			});
+			_richiestaClassi.done(function (data) {
+				let selectedIndex=slctClassi.prop("selectedIndex");
+				$(".deletableClass").remove();
+				appendClasses(data.classes, slctClassi, selectedIndex);
+				slctClassi.trigger("change");
+			});
+		});
 		slctMaterie.on("change", fillTable);
 		slctClassi.on("change", fillTable);
 
@@ -121,5 +123,21 @@ $(document).ready(function() {
 			_richiestaLogout.fail(function (jqXHR, test_status, str_error){ error(jqXHR, test_status, str_error); });
 			_richiestaLogout.done(function (data) { location.href="pages/login/login.html"; });
 		});
+
+		function appendClasses(vet, campo, selectedIndex) {
+			let aus=[];
+			for(let i=0;i<vet.length;i++)
+				aus[i]=vet[i]["classe"];
+
+			let classes = removeDumplicateValue(aus);
+			for(let i=0;i<classes.length;i++) {
+				$("<option>", {
+					text: classes[i],
+					value: classes[i]
+				}).addClass("deletableClass").appendTo(campo);
+			}
+
+			campo.prop("selectedIndex", selectedIndex);
+		}
 	});
 });

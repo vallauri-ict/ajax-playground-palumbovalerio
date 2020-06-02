@@ -21,7 +21,7 @@ function error(jqXHR, text_status, string_error) {
 }
 
 // md5 restituisce una word esadecimale, quindi è obbligatorio .toString()
-function pwEncrypton(password) { return CryptoJS.MD5(password).toString(); }
+function pwEncryption(password) { return CryptoJS.MD5(password).toString(); }
 
 function showLblError(lblError, textPointer, text) {
     lblError.show(); // unauthorized

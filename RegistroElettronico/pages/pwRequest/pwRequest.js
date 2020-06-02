@@ -54,7 +54,7 @@ $(document).ready(function() {
 			showLblError(_lblErrore, _errorText, "<strong>Attenzione!</strong> Risposta errata");
 		}
 		else {
-			let tempPw=pwEncrypton("prof"+username.val());
+			let tempPw=pwEncryption("prof"+username.val());
 			let _richiestaPw=inviaRichiesta("POST", "../../server/pwRequest.php", {"tempPw":tempPw});
 
 			_richiestaPw.fail(function(jqXHR, test_status, str_error) { error(jqXHR, test_status, str_error); });

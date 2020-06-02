@@ -50,8 +50,8 @@ $(document).ready(function() {
 			}
 			else{
 
-				let oldPwdCpt=pwEncrypton(oldPwd.val());
-				let newPwdCpt=pwEncrypton(newPwd.val());
+				let oldPwdCpt=pwEncryption(oldPwd.val());
+				let newPwdCpt=pwEncryption(newPwd.val());
 				let _richiestaCambioPwd= inviaRichiesta("POST", "../../server/changePw.php", { "vecchia":oldPwdCpt, "nuova":newPwdCpt } );
 
 				_richiestaCambioPwd.fail(function(jqXHR, test_status, str_error) {

@@ -30,7 +30,7 @@ $(document).ready(function() {
 		else if (_password.val() == "") setError(_password);
 		else{
 			let user=_username.val();
-			let pwd=pwEncrypton(_password.val());
+			let pwd=pwEncryption(_password.val());
 			let _richiestaLogin= inviaRichiesta("POST", "../../server/login.php", { "username":user, "password":pwd } );
 
 			_richiestaLogin.fail(function(jqXHR, test_status, str_error) {

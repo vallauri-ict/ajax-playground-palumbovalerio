@@ -16,7 +16,7 @@
 
 --------------------------------
 
-nomeProfessore | password
+Nome Professore | password
 ---------------|-----------------------
 Rossi 	|	matematica
 Verdi 	|	italianoStoria

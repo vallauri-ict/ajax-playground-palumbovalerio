@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 03, 2020 alle 08:41
+-- Creato il: Giu 03, 2020 alle 12:45
 -- Versione del server: 10.1.38-MariaDB
 -- Versione PHP: 7.3.4
 
@@ -99,7 +99,7 @@ CREATE TABLE `domande` (
 --
 
 INSERT INTO `domande` (`codProf`, `domanda`, `risposta`) VALUES
-(1, 'Quale è il tuo cibo preferito?', 'pizza'),
+(1, 'Dove abiti?', 'Carmagnola'),
 (2, 'Quale è il tuo cibo preferito?', 'pizza'),
 (3, 'Quale è il tuo cibo preferito?', 'pizza'),
 (4, 'Quale è il tuo cibo preferito?', 'pizza'),
@@ -364,7 +364,7 @@ CREATE TABLE `matematica` (
 --
 
 INSERT INTO `matematica` (`codAlunno`, `nominativo`, `classe`, `media`, `codProf`) VALUES
-(1, 'Allemandi', '1^A', 7, 1),
+(1, 'Allemandi', '1^A', 9, 1),
 (2, 'Gilli', '1^B', 8, 1),
 (3, 'Garello', '1^C', 6, 1),
 (4, 'Oddenino', '1^D', 5, 1),
@@ -388,7 +388,27 @@ INSERT INTO `matematica` (`codAlunno`, `nominativo`, `classe`, `media`, `codProf
 (22, 'Ricci', '5^C', 4, 1),
 (23, 'Bruno', '5^D', 5, 1),
 (24, 'Rizzo', '5^E', 8, 1),
-(25, 'Ribero', '1^A', 8, 1);
+(25, 'Ribero', '1^A', 8, 1),
+(26, 'De Luca', '1^A', 7, 1),
+(27, 'Marino', '1^A', 8, 1),
+(28, 'Greco', '1^A', 5, 1),
+(29, 'Barbieri', '1^B', 5, 1),
+(30, 'Lombardi', '3^B', 8, 1),
+(31, 'Giordano', '3^B', 7, 1),
+(32, 'Rinaldi', '3^B', 9, 1),
+(33, 'Colombo', '2^B', 7, 1),
+(34, 'Mancini', '2^B', 9, 1),
+(35, 'Longo', '4^A', 5, 1),
+(36, 'Leone', '4^A', 5, 1),
+(37, 'Martinelli', '5^B', 8, 1),
+(38, 'Marchetti', '5^B', 9, 1),
+(39, 'Martini', '5^C', 8, 1),
+(40, 'Galli', '3^E', 5, 1),
+(41, 'Gatti', '4^A', 8, 1),
+(42, 'Mariani', '5^D', 8, 1),
+(43, 'Ferrara', '5^D', 9, 1),
+(44, 'Santoro', '5^E', 4, 1),
+(45, 'Farina', '4^B', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -871,7 +891,7 @@ ALTER TABLE `italiano`
 -- AUTO_INCREMENT per la tabella `matematica`
 --
 ALTER TABLE `matematica`
-  MODIFY `codAlunno` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `codAlunno` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT per la tabella `professori`
